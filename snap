@@ -1,0 +1,11 @@
+#!/bin/sh
+#
+# Grabs a snapshot of a USB connected Android device. 
+
+if [[ -z $1 ]]; then
+	fileName="$(date +%F_%H.%M.%S).png"
+else 
+	fileName="${1}.png"  
+fi
+
+adb shell screencap -p | perl -pe 's/\x0D\x0A/\x0A/g' > $fileName
